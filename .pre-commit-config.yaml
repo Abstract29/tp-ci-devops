@@ -13,7 +13,7 @@ repos:
       - id: eslint
         files: \.[jt]sx?$
         types: [file]
-        args: ['--fix']
+        args: ["--config", "frontend/eslint.config.mjs"]
 
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.4.0

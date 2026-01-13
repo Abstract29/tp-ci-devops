@@ -36,13 +36,13 @@ function taskCard(task) {
     </div>
   `;
 
-  div.querySelector('[data-role="save"]').addEventListener("click", async () => {
-    const status = div.querySelector('[data-role="status"]').value;
+  div.querySelector("[data-role=\"save\"]").addEventListener("click", async () => {
+    const status = div.querySelector("[data-role=\"status\"]").value;
     await api(`/tasks/${task.id}`, { method: "PUT", body: JSON.stringify({ status }) });
     await refresh();
   });
 
-  div.querySelector('[data-role="delete"]').addEventListener("click", async () => {
+  div.querySelector("[data-role=\"delete\"]").addEventListener("click", async () => {
     if (!confirm("Supprimer cette tâche ?")) return;
     await api(`/tasks/${task.id}`, { method: "DELETE" });
     await refresh();
@@ -56,7 +56,7 @@ function escapeHtml(s) {
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
+    .replaceAll("\"", "&quot;")
     .replaceAll("'", "&#039;");
 }
 

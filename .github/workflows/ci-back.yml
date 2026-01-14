@@ -18,18 +18,25 @@ env:
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
-  lint-dockerfile:
+  lint-and-security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Lint Dockerfile with Hadolint
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: src/backend/Dockerfile
 
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: src/backend
+          framework: dockerfile
+          soft_fail: true
+
   build-scan-push:
-    needs: lint-dockerfile
+    needs: lint-and-security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

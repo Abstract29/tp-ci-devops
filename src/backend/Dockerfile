@@ -6,6 +6,7 @@ RUN addgroup --system appgroup && adduser --system --group appuser
 
 COPY requirements.txt .
 
+# hadolint ignore=DL3013
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=appuser:appgroup . .

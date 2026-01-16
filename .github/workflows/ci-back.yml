@@ -35,6 +35,17 @@ jobs:
           framework: dockerfile
           soft_fail: true
 
+  sonarqube-scan:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v5
+          with:
+            fetch-depth: 0
+        - uses: SonarSource/sonarqube-scan-action@v6
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   build-scan-push:
     needs: lint-and-security
     runs-on: ubuntu-latest
